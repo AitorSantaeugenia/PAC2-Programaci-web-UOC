@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PAC2 - Exercici 7: Agenda telèfons</title>
+
+    <script language="javascript">
+	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	                   CREACIO DE TOTES LES FUNCIONS EMPRADES
+	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+	//INICI Funcio validarTelefon
+	function validarTelefon(num){
+		//Retorna fals si no es un número o es diferent a 9 digits
+		if(isNaN(num) || num.length!=9)
+			return false;
+		
+		return true;
+	}
+	//INICI Funcio validarTelefon
+
+	
+	//INICI Funcio escriureContactes
+	function escriureContactes(contactes){
+		var cadena = "<dl>";
+		for(var i=0; i<contactes.length; i++){
+			cadena += "<dt><strong>" + contactes[i][0] + ":</strong> " + contactes[i][1] + "</dt>";
+			
+		}
+		   cadena += "</dl>";
+		   document.write(cadena);
+	}
+	//INICI Funcio escriureContactes
+	
+	
+	//INICI Funcio ordenarContactes
+	//Funció ordenarContactes fent un sort al array de contactes i cridant posteriorment a escriure contactes per imprimir-ho al html
+	function ordenarContactes(contactes) {
+		var ordenarAlf = contactes.sort();
+		escriureContactes(ordenarAlf);
+		
+	}
+	//FI Funcio ordenarContactes
+	
+	
+	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	                   CREACIO DE TOTES LES FUNCIONS EMPRADES
+	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+	
+	
+
+	
+	//INICI PROGRAMA
+	//Variable número de contactes
+	var numContactes = 0;
+        
+		
+	//Introduim per PROMPT el número de contactes que volem
+	do { 
+		numContactes = parseInt(prompt("Quants contactes vols introduir?"));   
+	//Ho farem sempre que sigui menor o igual a 0 o que NO sigui un número	
+	} while (isNaN(numContactes) || numContactes<=0)
+	  
+	
+	//ARRAY PER CONTACTES
+	var contactes = new Array();
+	//Variables de nom i telefon
+	var nom;
+	var telefon;
+	
+	
+	//INTRODUCCIO CONTACTES A ARRAY
+	for (var i=0;i<numContactes;i++) {
+		//NOM: És ralitzara fins a introduir-ho correctament
+		do { 
+			//PROMPT NOM
+			nom = prompt("Nom del contacte " + (i+1));   
+			if(!isNaN(nom)) 
+				alert("Introdueix un nom valid.")
+		} while (!isNaN(nom))
+			
+		//NUMERO: És ralitzara fins a introduir-ho correctament
+		do { 
+			//PROMPT NUMERO
+			telefon = prompt("Número de telèfon del contacte " + (i+1));
+			if(!validarTelefon(telefon)) 
+				alert("Introdueix un número de telèfon de 9 dígits.")
+		} while (!validarTelefon(telefon)) 
+	
+		//Afegim contacte al array.
+		contactes[i] = new Array(nom, telefon);
+		nom = telefon = '';
+	}
+	
+	
+	//Cridem funció escriureContactes
+	document.write("\n <strong> Llista de contactes: </strong> ")
+	escriureContactes(contactes);
+	
+	
+	//CONFIRM ORDENAR?
+	var ordenar = confirm("Vols ordenar els contactes introduits?");
+	if (ordenar){
+		//Si afirmem, cridarem a la funcio ordenarContactes
+		document.write("<br>")
+		document.write("\n <strong> Llista de contactes ordenada: </strong> ")
+		ordenarContactes(contactes);
+	}
+      
+
+
+	  
+    </script>
+		
+</head>
+
+<body>
+
+</body>
+</html>

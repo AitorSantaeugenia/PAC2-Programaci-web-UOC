@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>PAC2 - Exercici 6</title>
+
+<script language="javascript">
+	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	                   CREACIO DE TOTES LES FUNCIONS EMPRADES
+	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+	
+	
+	//INICI FUNCIÓ CERCAR PARAULES -------------------------------------------------------
+    function cercarParaula(text, paraula){
+        var paraules = separarParaules(text);
+        var numCoincidencies  = 0;
+
+        for(var i=0; i<paraules.length; i++){
+            if(paraules[i] == paraula)
+                numCoincidencies++;
+        }
+                return numCoincidencies;
+    }
+	//FI FUNCIÓ CERCAR PARAULES -----------------------------------------------------------
+
+	
+	//INICI FUNCIÓ SEPARAR PARAULES -------------------------------------------------------
+	function separarParaules(text){
+		//Eliminem els múltiples espais
+		text = text.replace(/\s{2,}/g, ' '); 
+		return text.split(" ");
+	}
+	//FI FUNCIÓ SEPARAR PARAULES -----------------------------------------------------------
+	
+	
+	//INICI FUNCIÓ QUANTITAT PARAULES -------------------------------------------------------	
+	function numParaules(text){
+			return separarParaules(text).length;
+
+	}
+	//FI FUNCIÓ QUANTITAT PARAULES ----------------------------------------------------------
+
+	
+	//INICI FUNCIÓ CONVERTIR MAJUSCULES -----------------------------------------------------	
+	function convertirMajuscula(text){
+			var paraules = separarParaules(text);
+			for(i=0;i < paraules.length ;i++){
+					paraules[i] = paraules[i].charAt(0).toUpperCase() + paraules[i].slice(1);
+			}
+
+			return paraules.join(' ');
+	}
+	//FI FUNCIÓ CONVERTIR MAJUSCULES --------------------------------------------------------	
+
+	
+	//INICI FUNCIÓ APARICIO LLETRES  --------------------------------------------------------
+	function numLletres(text) {		
+			var lletres = new Array(); 
+
+			for(var i=0; i<text.length; i++) {	
+					var codi = text.charCodeAt(i);	//Convertim cada lletra en el nombre del codi ISO-Latin-1
+
+					//Si ja existeix a l'array augmentem en 1 el seu valor, sinó l'inicialitzem
+					if(lletres[codi]) {		
+							lletres[codi]++ 
+					}
+					else {
+							lletres[codi] = 1;
+					}
+			}
+			return lletres;
+	}
+    //FI FUNCIÓ APARICIO LLETRES  -----------------------------------------------------------  
+     
+	 	
+	//INICI FUNCIÓ COMPTAR CARACTERS -------------------------------------------------------	
+	function numCaracters(text){
+			var numCaracters = text.length;
+			//alert(espaiNoCaracters);
+			return numCaracters;
+			//var caractersNoEspai = text.lenght;
+
+			/*return numCoincidenciaEspaiblanc;
+			alert(numCoincidenciaEspaiblanc);*/
+	}
+	//FI FUNCIÓ COMPTAR CARACTERS ----------------------------------------------------------
+	
+	
+	//INICI FUNCIÓ COMPTAR ESPAIS EN BLANC -------------------------------------------------------	
+	function numEspais(text){
+	
+	 		var numCoincidenciaEspaiblanc  = 0;			
+			for(var i=0; i<text.length; i++){
+				if(text[i] == ' ')
+					numCoincidenciaEspaiblanc++;
+			}
+			return numCoincidenciaEspaiblanc;
+	}
+	//FI FUNCIÓ COMPTAR ESPAIS EN BLANC ----------------------------------------------------------
+	
+	
+	//INICI FUNCIÓ COMPTAR CARACTERS SENSE ESPAI -------------------------------------------------------	
+	function numCaractersNoEspai(text){
+			var numCaracters = text.length;
+			
+	 		var numCoincidenciaEspaiblanc  = 0;			
+			for(var i=0; i<text.length; i++){
+				if(text[i] == ' ')
+					numCoincidenciaEspaiblanc++;
+			}
+			return numCaracters-numCoincidenciaEspaiblanc;
+	}
+	//FI FUNCIÓ COMPTAR CARACTERS SENSE ESPAI ----------------------------------------------------------
+
+	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	                   FI CREACIO DE TOTES LES FUNCIONS EMPRADES
+	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/	 
+	
+
+	
+	
+	//INICIEM PROMPT demanant frase a introduir
+	/*Realitzará aquesta acció sempre que la longitud del text sigui menor a 1*/
+	do { 
+		text = prompt("Escriu un text", "");
+	} while (text.length<1)
+	
+	//INICIEM PROMPT amb la paraula a cercar
+	/*Realitzará aquesta acció sempre que la longitud de la paraula sigui menor a 1*/
+	do { 
+		cadena = prompt("Quina paraula vols cercar en el text introduit", "");
+	} while (cadena.length<1)
+
+	//Inicialització funcions	
+	var totalCaracters = numCaracters(text);
+	var totalEspais = numEspais(text);
+	var totalCaractersSenseEspais = numCaractersNoEspai(text);
+	var totalParaules   = numParaules(text);
+	var totalCoincidencies = cercarParaula(text, cadena);
+	var textMajuscules  = convertirMajuscula(text);
+	var totalAparicions = numLletres(text);
+
+	//Pintem el text que volem apareix-hi al html
+	var html  = "<p><strong>El text introduit és:</strong> " + text + "</p>";
+		html += "<p><strong>La paraula cercada és:</strong> " + cadena + "</p>" + "<br>";
+		
+		html += "<p><strong>El número total de caracters és: </strong> " + totalCaracters + "</p>";
+		html += "<p><strong>El número total d'espais en blanc és: </strong> " + totalEspais + "</p>";
+		html += "<p><strong>El número total de caracters sense comptar espais en blanc: </strong> " + totalCaractersSenseEspais + "</p>" + "<br>";
+		
+		html += "<p><strong>La paraula apareix:</strong> " + totalCoincidencies  + "<strong> cops</strong>" + "</p>";
+		html += "<p><strong>El número total de paraules son:</strong> " + totalParaules + "<strong> paraules</strong>" + "</p>";
+		html += "<p><strong>Canviem les primeres lletres a majúscules:</strong> " + textMajuscules + "</p>";
+		html += "<p><strong>Resum aparicions de cada caracter:</strong><br>";
+			
+	//Array per el número d'aparicions de les lletres
+	for(var lletra in totalAparicions) {
+		//Només caracters, no espais en blanc
+		if(String.fromCharCode(lletra) !== ' ') {
+			html += String.fromCharCode(lletra)  + ": " + totalAparicions[lletra] + "<br />";
+		}
+	}
+		html += '</p>';
+	
+		
+		
+	//Escrivim el document al html	
+	document.write(html);
+    </script>
+		
+</head>
+
+<body>
+</body>
+</html>

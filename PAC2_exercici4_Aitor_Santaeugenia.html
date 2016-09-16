@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>PAC2 - Exercici 4: Tallers RUM-RUM</title>
+			<script language="javascript">
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//DEFINICIO CLASE TREBALLADOR
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				function Treballador(tNom, tCognom, tDataAlta, tSalari){
+				//Inici variables i definicio variables
+					var nom         = tNom;
+					var cognom     = tCognom;
+					var dataAlta    = tDataAlta;
+					var salari      = parseInt(tSalari);
+
+				//Definicio SETTERS
+					this.setNom = function(valor){
+						nom = valor;
+					}
+					this.setCognom = function(valor){
+						cognom = valor;
+					}
+					this.setDataAlta = function(valor){
+						dataAlta = valor;
+					}
+					this.setSalari = function(valor){
+						salari = valor;
+					}
+
+				//Definicio GETTERS  
+					this.getNom = function() {
+						return nom;
+					}
+					this.getCognom = function(){
+						return cognom;
+					}	
+					this.getDataAlta = function(){
+						return dataAlta;
+					}
+					this.getSalari = function(){
+						return salari;
+					}
+																		}
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//FI CLASE TREBALLADOR
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+				
+				
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//DEFINICIO COMPTABLE
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				function Comptable(tNom, tCognom, tDataAlta, tSalari){
+					//CALL clase superior treballador
+					Treballador.call(this,tNom, tCognom, tDataAlta, tSalari);
+																	  }
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//FI COMPTABLE
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//Herència treballador-comptable
+					Comptable.prototype = new Treballador();
+
+					
+					
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//DEFINICIO MECANIC
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
+				function Mecanic(tNom, tCognom, tDataAlta, tSalari){
+					//CALL clase superior treballador
+					Treballador.call(this,tNom, tCognom, tDataAlta, tSalari);
+					//Dietes
+					var dieta = 200;
+					//Definició SET DIETA
+					this.setDieta = function(valor){
+						dieta = valor;
+					}
+					//Definició GET DIETA
+					this.getDieta = function() {
+						return dieta;
+					}
+																	}
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//FI MECANIC
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
+
+				//Herència treballador-mecanic
+					Mecanic.prototype = new Treballador();
+			</script>	
+	</head>
+
+	<body>
+	</body>
+</html>

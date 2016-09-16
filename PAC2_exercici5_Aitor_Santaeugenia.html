@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>PAC2 - Exercici 5: Modificació tallers RUM-RUM</title>
+			<script language="javascript">
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//DEFINICIO CLASE TREBALLADOR
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				function Treballador(tNom, tCognom, tDataAlta, tSalari){
+					//Inici variables i definicio variables
+					var nom         = tNom;
+					var cognom      = tCognom;
+					var dataAlta    = tDataAlta;
+					var salari      = parseInt(tSalari);
+
+					//Definicio SETTERS
+					this.setNom = function(valor){
+						nom = valor;
+					}
+					this.setCognom = function(valor){
+						cognom = valor;
+					}
+					this.setDataAlta = function(valor){
+						dataAlta = valor;
+					}
+					this.setSalari = function(valor){
+						salari = valor;
+					}
+
+					//Definicio GETTERS  
+					this.getNom = function() {
+						return nom;
+					}
+					this.getCognom = function(){
+						return cognom;
+					}	
+					this.getDataAlta = function(){
+						return dataAlta;
+					}
+					this.getSalari = function(){
+						return salari;
+					}
+						
+					
+					//-------------------------------------------------------------------------------------------------------------
+					//CREACIO MÈTODES EXERCICI 5
+					//-------------------------------------------------------------------------------------------------------------
+					//CREACIÓ calcularSalari() exercici 5
+					this.calcularSalari = function(){
+						return (this.getSalari());
+					}
+
+					//CREACIÓ mostrarInfo() exercici 5
+					this.mostrarInfo = function(){
+							alert ("Menú mostrar informació" + "\n" + "\n" + "Nom: " + this.getNom() + "\n" + "Cognom: " + this.getCognom() + "\n" + "Data d'alta: " + this.getDataAlta()  );
+					}
+					
+					//CREACIÓ mostrarSalari() exercici 5
+					this.mostrarSalari = function(){
+						alert("Menú mostrar salari" + "\n" + "\n" + "Salari total del treballador: " + this.calcularSalari() + "€" );
+					}
+					//-------------------------------------------------------------------------------------------------------------
+					//FI CREACIÓ MÈTODES EXERCICI 5
+					//-------------------------------------------------------------------------------------------------------------		
+
+
+																		}
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//FI CLASE TREBALLADOR
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+				
+				
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//DEFINICIO COMPTABLE
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				function Comptable(tNom, tCognom, tDataAlta, tSalari){
+					//CALL clase superior treballador
+					Treballador.call(this,tNom, tCognom, tDataAlta, tSalari);
+																	  }
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//FI COMPTABLE
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//Herència treballador-comptable
+					Comptable.prototype = new Treballador();
+
+					
+					
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//DEFINICIO MECANIC
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
+				function Mecanic(tNom, tCognom, tDataAlta, tSalari){
+					//CALL clase superior treballador
+					Treballador.call(this,tNom, tCognom, tDataAlta, tSalari);
+					//Dietes
+					var dieta = 200;
+					//Definició SET DIETA
+					this.setDieta = function(valor){
+						dieta = valor;
+					}
+					//Definició GET DIETA
+					this.getDieta = function() {
+						return dieta;
+					}
+					
+					//-------------------------------------------------------------------------------------------------------------
+					// Cream calcularSalariAmbDieta ja que si ho feiem des de la cridada de TREBALLADOR no ens apareixia correctament en el cas
+					// del comptable, o en el cas del salari normal sense dieta
+					//-------------------------------------------------------------------------------------------------------------
+					this.calcularSalariAmbDieta = function(){
+						return (this.getSalari() + this.getDieta());
+					}
+					
+					//-------------------------------------------------------------------------------------------------------------
+					// Mostram salari del MECANIC
+					//-------------------------------------------------------------------------------------------------------------
+					this.mostrarSalari = function(){
+						alert("Menú mostrar salari" + "\n" + "\n" + "Salari: " + this.calcularSalari() + "€" 
+							+ "\n" + "Dietes: " + this.getDieta() + "€" + "\n" + "Salari total del treballador: " 
+							+ this.calcularSalariAmbDieta() + "€"  );
+
+					}
+																	}
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				//FI MECANIC
+				//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
+
+				//Herència treballador-mecanic
+					Mecanic.prototype = new Treballador();
+				
+				
+	//-------------------------------------------------------------------------------------------------------------
+	// CREACIO INSTÀNCIES
+	//-------------------------------------------------------------------------------------------------------------
+   
+	//MECANIC
+	var Mecanic1 = new  Mecanic("Aitor","Santaeugenia", "05/04/2016", 1000);
+    Mecanic1.mostrarInfo();
+    Mecanic1.mostrarSalari();
+     
+	//COMPTABLE
+    var Comptable1 = new  Comptable("Javi","Santaeugenia", "05/03/2014", 1500);
+    Comptable1.mostrarInfo();
+    Comptable1.mostrarSalari();
+	
+	//-------------------------------------------------------------------------------------------------------------
+	// FI CREACIO INSTÀNCIES
+	//-------------------------------------------------------------------------------------------------------------
+			</script>	
+	</head>
+
+	<body>
+	</body>
+</html>
